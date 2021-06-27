@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">LISTADO DE CONSUMO</span>
+                    <button class="btn btn-success float-end" routerLink="/crear-consumo">NUEVO REGISTRO</button>
+                    <button class="btn btn-success float-start" routerLink="/upload">SUBIR DATOS</button>
+                    <table *ngIf="listConsumos.length > 0" class="table table-striped mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Consumo (Wh)</th>
+                                <th scope="col">Precio (kWh)</th>
+                                <th scope="col">Coste por hora</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let consumo of listConsumos | paginate: { itemsPerPage: 25, currentPage: page }">
+                                <th scope="row">{{consumo.fecha | date: 'yyyy-MM-dd'}}</th>
+                                <td>{{consumo.hora}}</td>
+                                <td>{{consumo.consumo}}</td>
+                                <td>{{consumo.precioKwh}}</td>
+                                <td>{{consumo.costeHora}}</td>
+                                <td><i [routerLink]="['/editar-consumo', consumo._id]"
+                                        class="fas fa-edit text-primary"></i>
+                                    <i (click)='eliminarConsumo(consumo._id)' class="fas fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <h5 *ngIf="listConsumos.length == 0">No existen consumos para mostrar</h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="paginator">
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
+</div>

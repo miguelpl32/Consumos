@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="consumoForm" (ngSubmit)="agregarConsumo()">
+                        <div class="mb-3">
+
+                            <input type="date" formControlName="fecha" class="form-control">
+                            <div class="text-danger"
+                                *ngIf="consumoForm.get('fecha').hasError('required') && consumoForm.get('fecha').touched ">
+                                <span>La fecha es <strong>obligatoria</strong></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+
+                            <input type="number" formControlName="hora" class="form-control"
+                                placeholder="Introduzca la hora">
+                            <div class="text-danger"
+                                *ngIf="consumoForm.get('hora').hasError('required') && consumoForm.get('hora').touched ">
+                                <span>La hora es <strong>obligatoria</strong></span>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+
+                            <input type="number" formControlName="consumo" class="form-control"
+                                placeholder="Introduzca el consumo">
+                            <div class="text-danger"
+                                *ngIf="consumoForm.get('consumo').hasError('required') && consumoForm.get('consumo').touched ">
+                                <span>El consumo es <strong>obligatorio</strong></span>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+
+                            <input type="number" formControlName="precioKwh" class="form-control"
+                                placeholder="Introduzca Precio KWh">
+                            <div class="text-danger"
+                                *ngIf="consumoForm.get('precioKwh').hasError('required') && consumoForm.get('precioKwh').touched ">
+                                <span>El precio KWH es <strong>obligatorio</strong></span>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+
+                            <input type="number" formControlName="costeHora" class="form-control"
+                                placeholder="Introduzca coste por hora">
+                            <div class="text-danger"
+                                *ngIf="consumoForm.get('costeHora').hasError('required') && consumoForm.get('costeHora').touched ">
+                                <span>El coste por Hora es <strong>obligatorio</strong></span>
+                            </div>
+
+                        </div>
+                        <button routerLink="/" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                        <button type="submit" [disabled]="consumoForm.invalid"
+                            class="btn btn-success btn-lg float-end">ACEPTAR</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
